@@ -1,4 +1,4 @@
-function [ rul ] =  GK(agent, target, p, speed)
+function [ rul ] =  GK2(agent, target, p, speed)
 
     rul2 = rotateToAngle(agent,[agent.x - 10, agent.y], p);
     SpeedR = rul2.SpeedR;

@@ -11,5 +11,5 @@ function rul = obezd(agent, target, speed, R, a, A, vMax, k)
     dx = delta(1) * cos(alpha) - delta(2) * sin(alpha);
     dy = delta(1) * sin(alpha) + delta(2) * cos(alpha); 
     
-    rul = goToPointToo(agent, agent.z+[dx, dy], speed);
+    rul = goToPointToo(agent, agent.z+[dx, dy], smoothlyMoving(agent, target, A, vMax, k));
 end

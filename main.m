@@ -29,27 +29,29 @@ zMain_End=RP.zMain_End;
 %disp('hello');
 %
 
-if(~RP.Ball.I)
-    RP.Ball.x = oldBallPos(1);
-    RP.Ball.y = oldBallPos(2);
-end
+% % % if(~RP.Ball.I)
+% % %     RP.Ball.x = oldBallPos(1);
+% % %     RP.Ball.y = oldBallPos(2);
+% % % end
+% % % 
+% % % 
+% % % %RP.Blue(3).I
+% % % 
+% % % aaa = 1;
+% % % if(aaa == 1)
+% % %     target = [-3500, -1500];
+% % % else
+% % %     target = [-300, 2000];
+% % % end
+% % % 
+% % % RP.Blue(3).rul = kickBallToPoint(RP.Blue(3), RP.Blue(1), RP.Ball.z, [0, 0], 150, 30, 0.7, 21, 2, 1, 2.3);
+% % % RP.Blue(1).rul = GK(RP.Blue(1), RP.Ball.z, 21, 70);
+% % % %RP.Blue(3).rul = rotateAndGo(RP.Blue(3), target, 2, 1, 2.3, 21);
+% % % %RP.Blue(3).rul = obezd(RP.Blue(3), RP.Ball.z, 20, 150, 1, 0.25, 0.5, 2.3);
+% % % oldBallPos = RP.Ball.z;
 
-
-%RP.Blue(3).I
-
-aaa = 0;
-if(aaa == 1)
-    target = [-3500, -1500];
-else
-    target = [-300, 2000];
-end
-
-%RP.Blue(3).rul = kickBallToPoint(RP.Blue(3), RP.Blue(3), RP.Ball.z, [-3500, -1500], 15, 30, 0.7, 50, 0.25, 0.5, 2.3);
-%RP.Blue(3).rul = rotateAndGo(RP.Blue(3), RP.Ball.z, 2, 1, 2.3, 21);
-RP.Blue(3).rul = obezd(RP.Blue(3), RP.Ball.z, 20, 150, 1, 0.25, 0.5, 2.3);
-oldBallPos = RP.Ball.z;
-
-
+RP.Blue(3).rul = Crul(20, 0, 0, 20, 0);
+RP.Blue(5).rul = Crul(20, 0, 0, 20, 0);
 %disp(RP.Blue(3).z);
 
 
