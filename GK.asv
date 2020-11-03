@@ -27,11 +27,11 @@ function [ rul ] =  GK(agent, target, p, speed)
         Y = (K * (agent.x)) + B;
         
         if(Y < -500)
-            rul1 = GoToPoint(agent, [agent.x, -500], speed);
+            rul1 = GoToPoint(agent, [-100, -500], speed);
         elseif(Y > 500)
-            rul1 = GoToPoint(agent, [agent.x, 500], speed);
+            rul1 = GoToPoint(agent, [-100, 500], speed);
         else
-            rul1 = GoToPoint(agent, [agent.x, Y], speed);
+            rul1 = GoToPoint(agent, [-100, Y], speed);
         end
         SpeedY = rul1.SpeedY;
         SpeedX = rul1.SpeedX;
