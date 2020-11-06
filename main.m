@@ -54,13 +54,11 @@ end
 
 
 
-% RP.Blue(2).rul = kickBallToPoint(RP.Blue(2), RP.Blue(4), RP.Ball.z, [-4500, 0], 150, 30, 0.7, 100500, 2, 1, 2.3);
 % RP.Blue(1).rul = GK(RP.Blue(1), RP.Ball.z, 21, 30);
 % %RP.Blue(3).rul = kickBallToPoint(RP.Blue(3), RP.Blue(1), RP.Ball.z, [-4500, 0], 150, 30, 0.7, 21, 2, 1, 2.3);
 % %RP.Blue(4).rul = GK2(RP.Blue(4), RP.Ball.z, 21, 70);
 % %RP.Blue(3).rul = rotateAndGo(RP.Blue(3), target, 2, 1, 2.3, 21);
 % %RP.Blue(3).rul = obezd(RP.Blue(3), RP.Ball.z, 20, 150, 1, 0.25, 0.5, 2.3);
-oldBallPos = RP.Ball.z;
 %goToPointToo(RP.Blue(1), target, smoothlyMoving(RP.Blue(1), target, 2, 1, 2.3))
 
 %disp(RP.Blue(3).z);
@@ -70,8 +68,12 @@ oldBallPos = RP.Ball.z;
 %RotatePoint = [0, 0];
 
 %RP.Blue(3).rul = GoToPoint(RP.Blue(3), GoPoint, 15);
-RP.Blue(2).rul = RotateToPoint(RP.Blue(3), RotatePoint, 15);
-RP.Blue(3).rul = GK(RP.Blue(3), RP.Ball.z, 21, 30);
+RP.Blue(2).rul = kickBallToPoint(RP.Blue(2), RP.Blue(3), RP.Ball.z, [0, 0], 150, 30, 20, 2, 1, 2.3);
+RP.Blue(3).rul = GK(RP.Blue(3), RP.Ball.z, 21, 40, 1, 0.5, 2.3);
+
+if RP.Ball.I
+    oldBallPos = RP.Ball.z;
+end
 
 %% END CONTRIL BLOCK
 

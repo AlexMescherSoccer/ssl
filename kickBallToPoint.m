@@ -1,4 +1,4 @@
-function [ rul ] = kickBallToPoint(agent, gk, target, Point, R, p, kP, speed, A, vMax, k)
+function [ rul ] = kickBallToPoint(agent, gk, target, Point, R, p, speed, A, vMax, k)
 
     if(gk.y > 0)
         Point(2) = Point(2) - 200;
@@ -16,15 +16,21 @@ function [ rul ] = kickBallToPoint(agent, gk, target, Point, R, p, kP, speed, A,
     SpeedR = rul2.SpeedR;
 
 
-    if(abs(a/(norm(Point-agent.z)*norm(Point-target))) < 0.015 && scalarMult(Point-agent.z, Point-target) > 0)
+    if(abs(a/(norm(Point-agent.z)*norm(Point-target))) < 0.02 && scalarMult(Point-agent.z, Point-target) > 0)
 
         rul2 = rotateToAngle(agent, Point, p);
         SpeedR = rul2.SpeedR;
 
         if(agent.isBallInside)
-          rul = Crul(speed, 0, 1, SpeedR, 0);
+          rul1 = goToPointToo(agent, target, speed);
+          SpeedX = rul1.SpeedX;
+          SpeedY = rul1.SpeedY;
+          rul = Crul(SpeedX, SpeedY, 1, SpeedR, 0);
         else
-          rul = Crul(speed, 0, 0, SpeedR, 0);
+          rul1 = goToPointToo(agent, target, speed);
+          SpeedX = rul1.SpeedX;
+          SpeedY = rul1.SpeedY;
+          rul = Crul(SpeedX, SpeedY, 0, SpeedR, 0);
         end
           %rul = Crul(0, 0, 0, 0, 0);
     else
