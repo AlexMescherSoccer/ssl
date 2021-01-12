@@ -4,6 +4,7 @@ function u = smoothlyMoving(agent, target, a, vMax, k)
     persistent targetold;
     persistent vI;
     persistent v0;
+    agent.id = 1;
     c = 0.01;
     if(isempty(t))
         t = zeros(1, 12);
@@ -27,29 +28,29 @@ function u = smoothlyMoving(agent, target, a, vMax, k)
         v0 = 0;
     end
     
-    if(abs(targetold - target) > 50)
+    if(norm(targetold - target) > 100)
       v0 = vI;
       t(agent.id) = cputime();    
       S(agent.id) = norm(agent.z - target) / 1000;
     end
     targetold = target;
     T = cputime() - t(agent.id);
-    vLim = sqrt(S(agent.id) * a);
+    vLim = sqrt(S(agent.id) * a) + v0;
     if (vLim < vMax)
         vMax = vLim;
     end
-    t0 = vMax/a;
-    t1 = S(agent.id)/vMax;
-    tfin = t0+t1;
-    if(T <= t0)
+    t0 = (vMax - v0) / a;
+    t1 = (S(agent.id) * 2 * a - v0 ^ 2 - v0 * 2 * vMax) / vMax;
+    tfin = t0 + t1;
+    if(T <= t0) %разгон
       vI = v0 + a * T;
-      xI = v0 * T + (a * T * T) / 2;
-    elseif(T <= t1)
+      xI = v0 * T + (a * T ^ 2) / 2;
+    elseif(T <= t1) %на макс скорости
       vI = vMax;
-      xI = v0 * t0 + vMax * (T-t0) + (a * t0 ^ 2) / 2;
-    elseif(T <= tfin)
-      vI = v0 + vMax - a * (T - t1); 
-      xI = v0 * t0 + v0 * t1 + vMax * (t1-t0) + (a * t0 ^ 2) / 2 - (a * (T - t1) ^ 2) / 2;   
+      xI = v0 * t0 + (a * t0 ^ 2) / 2 + vMax * (T-t0);
+    elseif(T <= tfin) %замедление
+      vI = vMax - a * (T - t1); 
+      xI = v0 * t0 + (a * t0 ^ 2) / 2 + vMax * (t1-t0) - (a * (T - t1) ^ 2) / 2;   
     else
       vI = 0;
       xI = S(agent.id);
@@ -58,5 +59,4 @@ function u = smoothlyMoving(agent, target, a, vMax, k)
     
     %disp([vI, xI, S(agent.id) - norm(agent.z - target)*0.001]);
     u = (vI + k * (xI - S(agent.id) + norm(agent.z - target)*0.001)) / c;
-    %disp(u);
 end

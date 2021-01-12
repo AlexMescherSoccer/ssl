@@ -64,7 +64,7 @@ emptyrul=Crul(0,0,0,0,0);
 % --- Balls ----
 global Balls;
 if isempty(Balls)   
-    Balls=zeros(1, 3);  
+    Balls=zeros(1, 6);  
 end
 % --- FieldInfo ---
 global FieldInfo;
@@ -199,11 +199,11 @@ if isfield(RP,'Blues') && norm(size(Blues)-size(RP.Blues))==0
 end
 % RP.BallsSpeed
 
-if isfield(RP,'Balls') && norm(size(Balls)-size(RP.Balls))==0
-    activ=and(Balls(:,1)~=0,RP.Balls(:,1)~=0);
-    RP.BallsSpeed(activ)=sqrt((Balls(2)-RP.Balls(2)).^2+(Balls(3)-RP.Balls(3)).^2)/RP.dT;    
-    RP.Ballsang(activ)=angV(Balls(2:3)-RP.Balls(2:3));
-end
+% if isfield(RP,'Balls') && norm(size(Balls)-size(RP.Balls))==0
+%     activ=and(Balls(:,1)~=0,RP.Balls(:,1)~=0);
+%     RP.BallsSpeed(activ)=sqrt((Balls(2)-RP.Balls(2)).^2+(Balls(3)-RP.Balls(3)).^2)/RP.dT;    
+%     RP.Ballsang(activ)=angV(Balls(2:3)-RP.Balls(2:3));
+% end
 
 HeaderFilter();
 
@@ -213,12 +213,16 @@ RP.Yellows=Yellows;
 RP.Balls=Balls;
 RP.Rules=Rules;
 %--- RP interface ---
-RP.Ball.I=Balls(1);
-RP.Ball.x=Balls(2);
-RP.Ball.y=Balls(3);
-RP.Ball.z=Balls(2:3);
-RP.Ball.ang=RP.Ballsang;
-RP.Ball.v=RP.BallsSpeed;
+id = find(Balls(:, 1), 1);
+if (isempty(id))
+   id = 1; 
+end
+RP.Ball.I=Balls(id, 1);
+RP.Ball.x=Balls(id, 2);
+RP.Ball.y=Balls(id, 3);
+RP.Ball.z=Balls(id, 2:3);
+%RP.Ball.ang=RP.Ballsang;
+%RP.Ball.v=RP.BallsSpeed;
 RP.Ball.id=100;
 %% Координаты роботов
 if ~isfield(RP,'Extrap')

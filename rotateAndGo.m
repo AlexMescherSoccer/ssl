@@ -4,8 +4,6 @@ function rul = rotateAndGo(agent, target, a, vMax, k, p)
     SpeedX = rul1.SpeedX;
     SpeedY = rul1.SpeedY;
 
-
-    
     if(norm(target-agent.z) < 50)
       SpeedR = 0;
     else 
