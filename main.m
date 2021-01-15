@@ -53,10 +53,9 @@ end
 %RP.Blue(3).I
 
 % aaa = 1;
-kickPoint1 = [-3000, -1000];
-kickPoint2 = [-500, 1000];
+kickPoint1 = [0, 0];
+kickPoint2 = [-4500, 0];
 p = 1;
-k = 5;
 % if(aaa == 1)
 %     target = [-3500, -1500];
 % else
@@ -83,7 +82,9 @@ k = 5;
 %goToPointToo(RP.Blue(1), target, smoothlyMoving(RP.Blue(1), target, 2, 1, 2.3))
 
 %disp(RP.Blue(3).z);
-RP.Blue(4).rul = kickBallToPoint(RP.Blue(4), RP.Blue(4), RP.Ball.z, kickPoint1, 200, 30, 2, 1, k);
+    %RP.Blue(4).rul = defender(RP.Blue(4), RP.Ball.z, RP.Blue(1), kickPoint1, 300, 20, 2, 1, k(4));
+    RP.Blue(4).rul = kickBallToPoint(RP.Blue(4), RP.Blue(4), RP.Ball.z, kickPoint1, 150, 30, 1.5, 1, 1.3);
+%RP.Blue(4).rul = GK(RP.Blue(4), RP.Ball.z, 20, 10, 2, 1, k)
 
 %GoPoint = [-4200, 0];
 %RotatePoint = [0, 0];
