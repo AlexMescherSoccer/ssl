@@ -21,7 +21,6 @@ function [ rul ] = kickBallToPoint(agent, gk, target, Point, R, p, A, vMax, k)
         B = -(Point(1) - target(1));
         Aa = (Point(2) - target(2));
         D = abs(Aa*(agent.x - target(1)) + B*(agent.y - target(2))) / sqrt(Aa^2 + B^2);
-        disp([Point-agent.z, Point-target]);
         if(D < 20 && scalarMult(target - agent.z, target - Point) < 0)
             rul1 = goToPointToo(agent, target, smoothlyMoving(agent, target, A / 2, vMax / 2, k));
             SpeedX = rul1.SpeedX; 

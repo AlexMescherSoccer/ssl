@@ -29,6 +29,8 @@ zMain_End=RP.zMain_End;
 %disp('hello');
 %
 global oldBall1Pos;
+global pos;
+global t;
 
 if isempty(oldBall1Pos)
     oldBall1Pos = RP.Ball.z;
@@ -55,6 +57,8 @@ end
 % aaa = 1;
 kickPoint1 = [0, 0];
 kickPoint2 = [-4500, 0];
+tst1 = [0, -2000];
+tst2 = [-4500, -2000];
 p = 1;
 % if(aaa == 1)
 %     target = [-3500, -1500];
@@ -82,8 +86,24 @@ p = 1;
 %goToPointToo(RP.Blue(1), target, smoothlyMoving(RP.Blue(1), target, 2, 1, 2.3))
 
 %disp(RP.Blue(3).z);
-    %RP.Blue(4).rul = defender(RP.Blue(4), RP.Ball.z, RP.Blue(1), kickPoint1, 300, 20, 2, 1, k(4));
+    RP.Blue(1).rul = defender(RP.Blue(1), RP.Ball.z, RP.Blue(4), kickPoint1, 500, 20, 2, 1, 1.3);
     RP.Blue(4).rul = kickBallToPoint(RP.Blue(4), RP.Blue(4), RP.Ball.z, kickPoint1, 150, 30, 1.5, 1, 1.3);
+%     if isempty(pos) || isempty(t) 
+%         pos = R   P.Blue(4).z;
+%         t = cputime();
+%     end
+%     
+%     RP.Blue(4).rul = goToPointToo(RP.Blue(4), tst1, 50);
+%     curt = cputime();
+%     
+%     if(curt-t > 0.1 && RP.Blue(4).I)
+%        disp([norm(pos -  RP.Blue(4).z) / (curt-t), RP.Blue(4).x, RP.Blue(4).y, curt-t]);
+%        pos = RP.Blue(4).z;
+%        t = curt;
+%        
+%     end
+    
+    
 %RP.Blue(4).rul = GK(RP.Blue(4), RP.Ball.z, 20, 10, 2, 1, k)
 
 %GoPoint = [-4200, 0];
