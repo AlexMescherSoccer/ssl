@@ -26,21 +26,21 @@ zMain_End=RP.zMain_End;
 
 %% CONTRIL BLOCK
 
+global oldBallPos oldTime;
+curTime = cputime();
+if isempty(oldTime)
+    oldTime = curTime;
+end
+if isempty(oldBallPos) || curTime - oldTime > 5
+    startTime = curTime;
+    oldBallPos = [-2250 0];
+end
+oldTime = curTime;
+
+[RP.Ball.z, oldBallPos] = getBall(Balls, oldBallPos);
+
 %disp('hello');
 %
-global oldBall1Pos;
-global pos;
-global t;
-
-if isempty(oldBall1Pos)
-    oldBall1Pos = RP.Ball.z;
-end
-
-if (RP.Ball.I)
-    oldBall1Pos = RP.Ball.z;
-else
-    RP.Ball.z = oldBall1Pos;
-end
 
 % % ball = getPosBalls(RP.Balls,oldBall1Pos);
 % % b = find(ball(:,1));
@@ -86,8 +86,9 @@ p = 1;
 %goToPointToo(RP.Blue(1), target, smoothlyMoving(RP.Blue(1), target, 2, 1, 2.3))
 
 %disp(RP.Blue(3).z);
-    RP.Blue(1).rul = defender(RP.Blue(1), RP.Ball.z, RP.Blue(4), kickPoint1, 500, 20, 2, 1, 1.3);
-    RP.Blue(4).rul = kickBallToPoint(RP.Blue(4), RP.Blue(4), RP.Ball.z, kickPoint1, 150, 30, 1.5, 1, 1.3);
+   
+   RP.Blue(2).rul = defender(RP.Blue(2), RP.Ball.z, RP.Blue(4), kickPoint1, 500, 30, 2, 1, 1.3);
+   RP.Blue(1).rul = kickBallToPoint(RP.Blue(4), RP.Blue(4), RP.Ball.z, kickPoint1, 150, 30, 1.5, 1, 1.3);
 %     if isempty(pos) || isempty(t) 
 %         pos = R   P.Blue(4).z;
 %         t = cputime();
