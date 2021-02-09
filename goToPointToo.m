@@ -10,6 +10,5 @@ function rul = goToPointToo(agent, target, speed)
     
     size = sqrt(dx * dx + dy * dy);
     factor = speed / size;
-    
     rul = Crul(dx * factor, dy * factor, 0, 0, 0);
 end

@@ -1,5 +1,6 @@
 function [ rul ] =  GK(agent, target, pk, speed, A, vMax, k)
-    minBallDist = 7;
+    minBallDist = 150;
+    maxHistSize = 4;
     persistent targetHist;
    
     if isempty(targetHist)
@@ -9,35 +10,44 @@ function [ rul ] =  GK(agent, target, pk, speed, A, vMax, k)
     rul2 = rotateToAngle(agent,[agent.x, agent.y + 10], pk);
     SpeedR = rul2.SpeedR;
     
-    targetHist = [targetHist, [target(1); target(2)]];
-    
-    if(length(targetHist) > 7)
+    if(norm(target - targetHist(:, numel(targetHist)/2)') > 0)
+      targetHist = [targetHist, [target(1); target(2)]];
+    end
+
+    if(length(targetHist) > maxHistSize)
        targetHist = targetHist(:, 2:length(targetHist));
     end
-    
+    disp(norm(target - targetHist(:, 1)'));
     if(abs(norm(target - targetHist(:, 1)')) > minBallDist) 
-      p = polyfit(targetHist(1,:), targetHist(2,:), 1);
+      p = polyfit(targetHist(1, :), targetHist(2, :), 1);
       K = p(1);
       B = p(2);
-      Y = (K * (agent.x)) + B;
+      Y = (K * (-250)) + B;
+      disp('ggggggggg')
     else
+        
         if(target(2) < -500)
-          Y = -350;
+          Y = 0;
         elseif(target(2) > 500)
-          Y = 350; 
+          Y = 0; 
         else
           Y = 0;  
         end
+        disp('fffffff');
     end
 
     if(Y < -500)
-        Y = -500;
+        Y = -300;
     elseif(Y > 500)
-        Y = 500;
+        Y = 300;
     end
     
-    if(abs(agent.y - Y) > 65)
-        rul1 = goToPointToo(agent, [-250, Y], smoothlyMoving(agent, target, A, vMax, k));
+    if(norm(target - [0,0]) > norm(targetHist(:, numel(targetHist)/2)' - [0,0]))
+        Y = 0;
+    end
+    
+    if(abs(agent.y - Y) > 5)
+        rul1 = goToPointToo(agent, [-250, Y], smoothlyMoving(agent, [-250, Y], A, vMax, k));
         SpeedY = rul1.SpeedY;
         SpeedX = rul1.SpeedX;
     else
