@@ -3,6 +3,12 @@ function [ rul ] = defender(agent, target, frw, Point, Point2, R, p, A, vMax, k)
     v = Point - target;
     u = agent.z - target;   
     ortBase = v * (scalarMult(u, v) / (v * v')) + target;
+    if ortBase(1) > 0
+      ortBase = [250, 0];
+    end
+    if ortBase(1) < -4500
+      ortBase = [-4250, 0];  
+    end
     if(norm(ortBase - agent.z) < 150 && scalarMult(target - agent.z, target - Point) > 0)
             rul1 = goToPointToo(agent, target, smoothlyMoving(agent, target, A, vMax, k));
             SpeedX = rul1.SpeedX; 

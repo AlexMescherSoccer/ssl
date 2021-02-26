@@ -38,14 +38,11 @@ if isempty(oldBotPos)
    oldBotPos = RP.Blue(3).z;
 end
 oldTime = curTime;
-disp(abs(norm(oldBotPos - RP.Blue(3).z)));
-
+% disp(oldBotPos);
  [RP.Ball.z, oldBallPos] = getBall(Balls, oldBallPos);
-if  abs(norm(oldBotPos - RP.Blue(3).z)) > 100
-    disp('ffffffffffffff');
-    RP.Blue(3).z = oldBotPos;
+if norm(oldBotPos - RP.Blue(3).z) < 600
+    RP.Blue(3).z = (oldBotPos + RP.Blue(3).z) / 2;
 end
-disp(RP.Blue(3).z);
 goal1 = [0, 0];
 
 goal2 = [-4500, 0];
