@@ -1,4 +1,4 @@
-function [ball] = getPosBalls(Balls,oldBallPos)
+function [ball] = getPosPonts(Balls,oldBallPos)
 
     ballFindingZone = 500;
     ball = [0,0,0;0,0,0;0,0,0;0,0,0];

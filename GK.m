@@ -1,4 +1,4 @@
-function [ rul ] =  GK(agent, target, goal, pk, speed, A, vMax, k, grn)
+function [ rul ] =  GK(agent, target, goal, pk, speed, A, vMax, k)
     minBallDist = 15;
     maxHistSize = 4;
     persistent targetHist;
@@ -107,7 +107,7 @@ function [ rul ] =  GK(agent, target, goal, pk, speed, A, vMax, k, grn)
 %         end
 %     end
     
-            if(abs(agent.y - Y) > 5)
+            if(abs(agent.y - Y) > 3)
                 rul1 = goToPointToo(agent, [goal(1), Y], smoothlyMoving(agent, [goal(1), Y], A, vMax, k));
                 SpeedY = rul1.SpeedY;
                 SpeedX = rul1.SpeedX;
